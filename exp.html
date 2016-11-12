@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Experiment #1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="js/bootstrap.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	
+	<script>
+	var dbg = false, errorHasOccured = false;
+	var expID = -1, qID = 1;
+	var answers = [];
+	var descriptions = ['Did you hear cat?', 'Did you listen "la-la-la"?', 'Is this a picture of the Earth?'];
+
+
+	function geturlparamvalue(name) {
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(window.location.href);
+		if(results!=null){
+			return results[1];
+		}else{
+			return -1;
+		}
+	}
+	
+
+	$(document).ready(function(){
+
+		expID = geturlparamvalue("expId");
+		qID = parseInt(geturlparamvalue("q"));
+		console.log(expID,qID);
+
+		$("#infoHeader").html('<h1>Experiment #'+expID+', Question #'+qID+'</h1>');
+		$("#q1").hide();
+		$("#q2").hide();
+		$("#q3").hide();
+
+		$("#submitTrue").click(function(){
+			console.log("true");
+			answers.push(true);
+			var nextQuestionId = qID + 1;
+			window.location.assign("./exp.html?expId="+expID+"&q="+nextQuestionId);
+		});
+		
+		$("#submitFalse").click(function(){
+			console.log("false");
+			answers.push(false);
+			var nextQuestionId = qID + 1;
+			window.location.assign("./exp.html?expId="+expID+"&q="+nextQuestionId);
+		});
+
+		loadNextQuestion(qID);
+	
+	});
+
+	function loadNextQuestion(qID){
+		if(qID > 3){
+			document.write('<h1 class="text-center">Congratulations! You reached the end of the experiment!</h1><p class="text-center">'+answers+'</p>');
+			return;
+		}
+		console.log("nextQuestion= ", qID);
+		$("#q"+qID).show();
+		$("#description").html(descriptions[qID-1]);
+	}
+
+	
+
+
+	</script>
+
+</head>
+<body>
+	
+	<div id="infoHeader" class="text-center"></div>
+	<p></p>
+		
+	<div id="q1" class="text-center">
+		<audio controls>
+		  <source src="exp1/cat.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+	</div>
+
+	<div id="q2" class="text-center">
+		<video controls>
+			<source src="exp1/vid.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+	</div>
+
+	<div id="q3" class="text-center">
+		<img src="exp1/gabor.png" />
+	</div>
+
+	<div id="buttons" class="text-center">
+		<div id="description"></div>
+		<h2>
+		<input type="submit" id="submitFalse"  value="FALSE">
+		<input type="submit" id="submitTrue" value="TRUE">
+		</h2>
+	</div>
+
+
+
+</body>
+</html>
+
+

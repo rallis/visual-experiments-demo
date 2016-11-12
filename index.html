@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Experiment Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="js/bootstrap.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	
+	<script>
+	var dbg = false, errorHasOccured = false;
+	
+	function geturlparamvalue(name) {
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(window.location.href);
+		if(results!=null){
+			return results[1];
+		}else{
+			return -1;
+		}
+	}
+	
+
+	$(document).ready(function(){
+
+		$('#guide-tabs li:eq(1) a').tab('show')
+		$("#startexperiment").click(function(){
+			console.log("starting!..");
+			window.location.assign ("./exp.html?expId=1&q=1")
+			// $("#buildmapmenucontent").slideDown();
+			// $("#inputdatamenu").slideDown();
+			// $("#extendmapmenucontent").slideUp();
+			// $("#computemenu").slideUp();
+		});
+
+
+		// $.ajax({url: "./extra/maps.txt", success: function(result){
+		// 	// LOAD FILENAMES OF MAPS 
+		// 	//var result = JSON.parse(result);
+		// 	//console.log(result);
+		// 	var resfetch=JSON.parse(result)['maps'];
+		// 	var outcome='';
+		// 	for(i=0;i<resfetch.length;i++){
+		// 		outcome+='<div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#modmap-accordion-'+i+'" href="#modmap-collapse-'+i+'">'+resfetch[i][0]+'&nbsp;&nbsp;<span class="badge">'+resfetch[i][1].length+'</span></a></h4></div>';
+		// 		var tmp='<div id="modmap-collapse-'+i+'" class="panel-collapse collapse out"><div class="panel-body"><ul class="list-group large-group">';
+		// 		for(var j=0; j<resfetch[i][1].length; j++){
+		// 			tmp+='<li class="list-group-item"><a href="#">'+resfetch[i][1][j]+'</a></li>';
+		// 		}
+		// 		tmp+='</ul></div></div>';
+		// 		outcome+=tmp;
+		// 	}
+		// 	$('#listgroupsofmaps').html(outcome);
+		// }});	
+
+	});
+	</script>
+
+</head>
+<body>
+
+	<div class="page-header">
+		<h1 class="text-center">Experiment LOGO/Title</h1>
+	</div>
+
+	<div class="container">
+		<ul class="nav nav-tabs" id="guide-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+			<li><a data-toggle="tab" href="#menu1">Experiment</a></li>
+			<li><a data-toggle="tab" href="#menu2">About</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="home" class="tab-pane fade in active">
+				<p></p>
+				<ul>
+				<li>General description about experiments</li>
+				<li>Registration panel</li>
+				<li>Recent news</li>				
+				</ul>
+			</div>
+			<div id="menu1" class="tab-pane fade">
+				<h3>Experiment #1</h3>
+				<input type="button" id="startexperiment" name="startexperiment" value="Click to Start Experiment!">
+			
+			</div>
+			<div id="menu2" class="tab-pane fade">
+				<p></p>
+				<dl class="dl-horizontal">
+					<dt>Experiments by:</dt>
+					<dd>TBA</dd>
+					<dt>Coded by:</dt>
+					<dd>TBA</dd>
+					<dt>General Info:</dt>
+					<dd>TBA</dd>
+					<dt>HotKeys/Shortcuts:</dt>
+					<dd>TBA</dd>
+				</dl>
+				<p></p>	
+			</div>
+		</div>	
+	</div>
+
+</body></html>
+
+
